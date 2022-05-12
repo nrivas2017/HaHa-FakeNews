@@ -117,5 +117,3 @@ def textacyExample(data):
 	doc_term_matrix, vocab = representations.build_doc_term_matrix(tokenized_docs)
 
 	print(doc_terms_matrix)
-
-textacyExample(data)
