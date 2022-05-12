@@ -1,0 +1,3 @@
+https://datascience.eu/es/aprendizaje-automatico/que-es-light-gbm/
+https://www.analyticsvidhya.com/blog/2017/06/which-algorithm-takes-the-crown-light-gbm-vs-xgboost/
+https://github.com/microsoft/LightGBM/issues/1360
