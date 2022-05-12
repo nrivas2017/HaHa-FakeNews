@@ -29,7 +29,7 @@ def mergeColumnas(df):
 #--------------------------------------------------------
 
 df_inicial = pd.read_excel("./corpus/train.xlsx")
-pltData = plotData(df_inicial)
+pltData = plotData.plotData(df_inicial)
 
 #Se copian los dataframes para tomar cada caso
 df_merge1 = df_inicial.copy() ; df_texto1 = (df_inicial['Text'].copy()).to_frame()
@@ -56,10 +56,26 @@ df_texto1.to_csv('./export/pruebas/ej_texto1.csv')
 df_texto2.to_csv('./export/pruebas/ej_texto2.csv')
 
 
+# EXTRACCION DE CARACTERISTICAS
 
+# LabelEncoder
 
+from sklearn.preprocessing import LabelEncoder
 
+le = LabelEncoder()
 
+#df_inicial.to_excel("antes.xlsx")
 
+# Normalizar Topic y Source
+df_inicial.Topic = le.fit_transform(df_inicial.Topic)
+df_inicial.Source = le.fit_transform(df_inicial.Source)
+
+#df_inicial.to_excel("despues.xlsx")
     
+# TF-IDF ¿?
+
+
+# LightGBM
+
+
 
