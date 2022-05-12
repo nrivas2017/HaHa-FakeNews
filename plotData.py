@@ -6,8 +6,6 @@ import math
 import pandas as pd 
 
 
-df_inicial = pd.read_excel("./corpus/train.xlsx")
-
 def crear_mFrecuencia(sentences):
     mFrecuencia = {}
     stopWords = set(stopwords.words("spanish"))
@@ -133,7 +131,6 @@ def plotData(df):
     for i in range(len(puntuaciones)):
         y.append(y_sum)
         y_sum +=0.1
-
     plt.scatter(puntuaciones,y)
     plt.show()
-plotData(df_inicial)
+
