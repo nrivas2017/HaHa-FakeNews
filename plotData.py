@@ -4,6 +4,9 @@ from nltk import sent_tokenize, word_tokenize, PorterStemmer
 from nltk.corpus import stopwords 
 import math
 import pandas as pd 
+import seaborn as sns
+from pylab import savefig
+
 
 
 def crear_mFrecuencia(sentences):
@@ -50,6 +53,7 @@ def crear_OracionexPal(freq_matrix):
                 word_per_doc_table[word] = 1
 
     return word_per_doc_table
+
 def crear_mIDF(freq_matrix,OraxPal,total_doc):
     mIDF = {}
     for sent,f_table in freq_matrix.items():
@@ -59,6 +63,7 @@ def crear_mIDF(freq_matrix,OraxPal,total_doc):
 
         mIDF[sent] = idf_table
     return mIDF
+
 def crear_mTFIDF(tf_matrix,idf_matrix):
     tf_idf_matrix = {}
     for (sent1, f_table1), (sent2, f_table2) in zip(tf_matrix.items(), idf_matrix.items()):
@@ -68,6 +73,7 @@ def crear_mTFIDF(tf_matrix,idf_matrix):
             tf_idf_table[word1] = float(value1 * value2)
         tf_idf_matrix[sent1] = tf_idf_table
     return tf_idf_matrix
+
 def puntuar_palabra(tf_idf_matrix) -> dict:
 
     sentenceValue = {}
@@ -81,6 +87,7 @@ def puntuar_palabra(tf_idf_matrix) -> dict:
         sentenceValue[sent] = total_score_per_sentence / count_words_in_sentence
 
     return sentenceValue
+    
 def plotData(df):
     
     #nlp = spacy.load("es_core_news_lg")
@@ -133,4 +140,48 @@ def plotData(df):
         y_sum +=0.1
     plt.scatter(puntuaciones,y)
     plt.show()
+
+
+#Analisis exploratorio de datos (EDA)
+def EDA(df):
+
+    #Comprobacion de datos nulos y tipos de variables por columna
+    infoData = df.info()
+    print(infoData)
+
+    #Count categoria
+    fig1 = sns.countplot(data=df, x='Category')
+    plt.title("Frecuencia de noticias por Category")
+    plt.show()
+    fig1 = fig1.get_figure()  
+    fig1.savefig('./export/graficos/g1.png')
+
+    #Count topic
+    fig2 = sns.catplot(y='Topic',
+                kind='count',
+                height=6, 
+                aspect=1,
+                order=df.Topic.value_counts().index,
+                data=df)
+    plt.title("Frecuencia de noticias por Topic")
+    plt.show()
+    fig2.savefig('./export/graficos/g2.png')
+
+    #Fake/True por categoria
+    fig3 = sns.catplot(y="Topic", hue="Category", kind="count", edgecolor=".6",
+                data=df)
+    plt.title("Veracidad de noticias por Category")
+    plt.show()
+    fig3.savefig('./export/graficos/g3.png')
+
+    # #Fake/True por fuente
+    # sns.catplot(y="Source", hue="Category", kind="count", edgecolor=".6",
+    #             data=df)
+    # plt.title("Veracidad de noticias por Fuente")
+    # plt.show()
+
+
+    return 
+
+
 
