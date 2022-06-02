@@ -16,13 +16,12 @@ def extraccionCaracteristicas(df):
     #TF-IDF  
 
     vectorizer = TfidfVectorizer()
-
-    vectors = vectorizer.fit_transform(copia_df)
+    vectors = vectorizer.fit_transform(df['Text'])
     feature_names = vectorizer.get_feature_names_out()
     dense = vectors.todense()
     denselist = dense.tolist()
 
     res = pd.DataFrame(denselist, columns=feature_names)
     res.to_csv('./export/tf-idf.csv', header=True, index=True)
-    print(res)
+
     return df
