@@ -1,6 +1,6 @@
-import pandas as pd, nltk, string, plotData
+import pandas as pd, nltk, string
 from featureExtraction import extraccionCaracteristicas
-from plotData import plotData, EDA
+from plotData import EDA
 
 #Instalar en la primera ejecucion
 #nltk.download('popular')
@@ -32,23 +32,21 @@ def minusColumna(df):
     for sCol in aCols: df[sCol] = df[sCol].str.lower()
 
 
-#Union de set de testeo y entrenamiento para el preprocesamiento
+#Creacion de dataframe
 #--------------------------------------------------------
 
-df_train = pd.read_excel("./corpus/train.xlsx")
-df_test = pd.read_excel("./corpus/development.xlsx")
+df_general = pd.read_excel("./corpus/train.xlsx")
 
-df_general = df_train.append(df_test, ignore_index=True)
+#Analisis exploratorio de datos (graficos)
 pltVis = EDA(df_general)
 minusColumna(df_general)
+
+#Extraccion de caracteristicas
 df_general = extraccionCaracteristicas(df_general)
 
-
 #Se copian los dataframes para tomar cada caso
-df_merge1 = df_general.copy()
-df_merge2 = df_general.copy()  
+df_merge1 = df_general.copy() ; df_merge2 = df_general.copy()  
 df_texto1 = (df_general['Text'].copy()).to_frame()
-  
 
 # CASO 1: Merge columnas quitando palabras vacias
 removeStopWords(df_merge1,0) ; mergeColumnas(df_merge1)
@@ -67,10 +65,12 @@ df_texto2 = (df_general['Text'].copy()).to_frame()
 
 
 #Export para revisar
-#df_merge1.to_csv('./export/pruebas/ej_merge1.csv')
-#df_merge2.to_csv('./export/pruebas/ej_merge2.csv') 
-#df_texto1.to_csv('./export/pruebas/ej_texto1.csv')
-#df_texto2.to_csv('./export/pruebas/ej_texto2.csv')
+df_merge1.to_csv('./export/pruebas/ej_merge1.csv')
+df_merge2.to_csv('./export/pruebas/ej_merge2.csv') 
+df_texto1.to_csv('./export/pruebas/ej_texto1.csv')
+df_texto2.to_csv('./export/pruebas/ej_texto2.csv')
+
+
 
 
 
