@@ -65,10 +65,10 @@ df_texto2 = (df_general['Text'].copy()).to_frame()
 
 
 #Export para revisar
-df_merge1.to_csv('./export/pruebas/ej_merge1.csv')
-df_merge2.to_csv('./export/pruebas/ej_merge2.csv') 
-df_texto1.to_csv('./export/pruebas/ej_texto1.csv')
-df_texto2.to_csv('./export/pruebas/ej_texto2.csv')
+#df_merge1.to_csv('./export/pruebas/ej_merge1.csv')
+#df_merge2.to_csv('./export/pruebas/ej_merge2.csv') 
+#df_texto1.to_csv('./export/pruebas/ej_texto1.csv')
+#df_texto2.to_csv('./export/pruebas/ej_texto2.csv')
 
 
 

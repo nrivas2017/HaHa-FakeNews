@@ -39,11 +39,11 @@ def EDA(df):
     plt.show()
     fig3.savefig('./export/graficos/g3.png')
 
-    # #Fake/True por fuente
-    # sns.catplot(y="Source", hue="Category", kind="count", edgecolor=".6",
-    #             data=df)
-    # plt.title("Veracidad de noticias por Fuente")
-    # plt.show()
+     #Fake/True por fuente
+    sns.catplot(x="Category", col="Source", kind="count", edgecolor=".6", col_wrap=10,
+                 data=df, col_order=df["Source"].value_counts().iloc[:40].index,height=2.5, aspect=.8)
+    plt.title("Veracidad de noticias por Fuente")
+    plt.show()
 
 
     return 
